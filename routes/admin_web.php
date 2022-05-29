@@ -15,12 +15,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-
-Auth::routes();
-
-Route::get('/','Frontend\PageController@index')->name('home');
-
-Route::get('/admin/login','Auth\AdminLoginController@showLoginForm')->name('admin');
-Route::post('/admin/login','Auth\AdminLoginController@login')->name('admin.login');
-Route::post('/admin/logout','Auth\AdminLoginController@logout')->name('admin.logout');
+// route group
+Route::prefix('admin')->namespace('Backend')->name('admin.')->middleware('auth:admin_user')->group(function(){
+   Route::get('/','PageController@index')->name('home');
+});
 
