@@ -33,9 +33,15 @@
             <ul class="vertical-nav-menu">
                 <li class="app-sidebar__heading">Dashboards</li>
                 <li>
-                    <a href="{{ route('admin.home') }}" class="mm-active">
-                        <i class="metismenu-icon pe-7s-rocket"></i>
-                        Dashboard 
+                    <a href="{{ route('admin.home') }}" class="@yield('admin-index')">
+                        <i class="metismenu-icon pe-7s-display2"></i>
+                        Dashboard
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('admin.admin-user.index') }}" class="@yield('admin-user-index')">
+                        <i class="metismenu-icon pe-7s-users"></i>
+                        Admin User 
                     </a>
                 </li>
             </ul>

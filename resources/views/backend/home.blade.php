@@ -1,5 +1,6 @@
 @extends('backend.layouts.app')
 @section('title','Admin Dashboard')
+@section('admin-index','mm-active')
 @section('content')
  <div class="app-page-title">
     <div class="page-title-wrapper">

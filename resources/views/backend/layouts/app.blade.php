@@ -13,26 +13,30 @@
     <title>@yield('title')</title>
 
     <link href="{{ asset('assets/css/main.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
+    @yield('extra_css')
 </head>
 
 <body>
     <div class="app-container app-theme-white body-tabs-shadow fixed-sidebar fixed-header">
-       @include('backend.layouts.header')
+        @include('backend.layouts.header')
 
         <div class="app-main">
-          @include('backend.layouts.sidebar')
+            @include('backend.layouts.sidebar')
             <div class="app-main__outer">
                 <div class="app-main__inner">
-                   @yield('content')
+                    @yield('content')
                 </div>
                 <div class="app-wrapper-footer">
                     <div class="app-footer">
                         <div class="app-footer__inner">
                             <div class="app-footer-left">
-                               <span>Copyright {{ date('Y') }}. All right reserve by Magic Pay.</span>
+                                <span>Copyright {{ date('Y') }}. All right reserve by Magic Pay.</span>
                             </div>
                             <div class="app-footer-right">
-                               <span>Developed by Min Khant Maw</span>
+                                <span>Developed by Min Khant Maw</span>
                             </div>
                         </div>
                     </div>
@@ -41,6 +45,44 @@
         </div>
     </div>
     <script type="text/javascript" src="{{ asset('assets/scripts/main.js') }}"></script>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap4.min.js"></script>
+    <!-- Laravel Javascript Validation -->
+    <script type="text/javascript" src="{{ url('vendor/jsvalidation/js/jsvalidation.js') }}"></script>
+    {{-- sweet alert cdn --}}
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+        $(document).ready(function() {
+            $('.back-btn').click(function() {
+                window.history.back();
+            });
+        });
+        // sweet alert message
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+        })
+
+        @if(session('create'))
+
+        Toast.fire({
+            icon: 'success',
+            title: '{{ session('create') }}'
+        })
+        @endif
+    </script>
+
+    @yield('scripts')
 </body>
 
 </html>
