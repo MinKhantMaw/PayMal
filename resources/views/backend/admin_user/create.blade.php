@@ -20,7 +20,7 @@
                 @include('backend.layouts.flash')
                 <div class="card ">
                     <div class="card-body">
-                       <form action="{{ route('admin.admin-user.store') }}" method="POST" id="create">
+                       <form action="{{ route('admin.admin-user.store') }}" method="POST" id="update ">
                            @csrf
                          <div class="">
                             <div class="form-group">
@@ -53,7 +53,7 @@
 @endsection
 
 @section('scripts')
-     {!! JsValidator::formRequest('App\Http\Requests\StoreAdminUser','#create') !!}
+     {!! JsValidator::formRequest('App\Http\Requests\UpdateAdminUser','#update') !!}
 
     <script>
         $(document).ready(function() {

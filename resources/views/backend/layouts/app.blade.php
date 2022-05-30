@@ -10,6 +10,7 @@
         content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no" />
     <meta name="description" content="This is an example dashboard created using build-in elements and components.">
     <meta name="msapplication-tap-highlight" content="no">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title')</title>
 
     <link href="{{ asset('assets/css/main.css') }}" rel="stylesheet">
@@ -46,7 +47,7 @@
     </div>
     <script type="text/javascript" src="{{ asset('assets/scripts/main.js') }}"></script>
 
-    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap4.min.js"></script>
     <!-- Laravel Javascript Validation -->
@@ -56,6 +57,14 @@
 
     <script>
         $(document).ready(function() {
+            let token = document.head.querySelector('meta[name="csrf-token"]');
+            if (token) {
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF_TOKEN': token.content
+                    }
+                });
+            }
             $('.back-btn').click(function() {
                 window.history.back();
             });
@@ -73,12 +82,22 @@
             }
         })
 
-        @if(session('create'))
+        // create
+        @if (session('create'))
 
-        Toast.fire({
-            icon: 'success',
-            title: '{{ session('create') }}'
-        })
+            Toast.fire({
+                icon: 'success',
+                title: '{{ session('create') }}'
+            })
+        @endif
+
+        // update
+        @if (session('update'))
+
+            Toast.fire({
+                icon: 'success',
+                title: '{{ session('update') }}'
+            })
         @endif
     </script>
 
